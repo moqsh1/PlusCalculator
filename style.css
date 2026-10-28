@@ -94,10 +94,10 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 /* ---------- keypad ---------- */
 #keypad{flex:none;display:flex;height:calc(min(16.6667vw,9.6vh) * 4);background:var(--numBg)}
 /* column widths in units: fn 0.75+0.75, GST 0.9, digits 3, + 1, ops 1 = 7.4 */
-#fnPane{position:relative;width:20.27%;background:var(--fnBg);overflow:hidden;touch-action:pan-y}
+#fnPane{position:relative;width:14.2%;background:var(--fnBg);overflow:hidden;touch-action:pan-y}
 .fnPage{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,1fr);transition:transform .25s ease}
 #numPane{flex:1;display:flex;background:var(--numBg)}
-#digits{flex:3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))}
+#digits{flex:4.5;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))}
 #plusCol,#opCol{flex:1;min-width:0;display:flex;flex-direction:column}
 #plusCol .k.plus{flex:1}
 /* tall shape: one long + drawn with two bars — vertical bar runs ~84% of the key height */
@@ -127,7 +127,7 @@ body.gstmode #gstRow .gsw .tg::after{left:15px}
 body[data-gst=row]:not(.gstmode) #gstRow .k.gst:not(.gsw){opacity:.3}
 body[data-gst=row] #gstRow{display:flex}
 body[data-gst=row] #gstCol,body[data-gst=off] #gstCol{display:none}
-body[data-gst=row] #fnPane,body[data-gst=off] #fnPane{width:28.5714%}
+body[data-gst=row] #fnPane,body[data-gst=off] #fnPane{width:20%}
 body[data-gst=row] .k.fn svg,body[data-gst=off] .k.fn svg{width:27px;height:27px}
 body[data-gst=row] .k.fn.t,body[data-gst=off] .k.fn.t{font-size:22px;font-weight:600}
 .k.d{color:var(--numGlyph);font-size:clamp(36px,12vw,52px);font-weight:600}
@@ -226,3 +226,5 @@ body.commenting #commentBar{display:flex}
 #sheet .memv{margin-left:auto;font-variant-numeric:tabular-nums}
 
 #toast{position:fixed;left:50%;bottom:140px;transform:translateX(-50%);z-index:40;background:rgba(30,30,30,.92);color:#fff;font-size:14px;padding:10px 16px;border-radius:20px;white-space:nowrap}
+
+#dispTotal.bold-total { font-weight: 800 !important; }

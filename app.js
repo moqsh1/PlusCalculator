@@ -256,6 +256,7 @@ function press(k) {
 }
 function opKey(k) {
   const t = T();
+  document.getElementById('dispTotal').classList.remove('bold-total');
   if (mode && mode.type === 'edit') {
     const r = t.rows[mode.i - 1];
     if (r.kind === 'total') { mode = null; return; }
@@ -268,6 +269,7 @@ function opKey(k) {
 }
 function eqKey() {
   const t = T();
+  document.getElementById('dispTotal').classList.add('bold-total');
   if (mode && mode.type === 'edit') {
     const r = t.rows[mode.i - 1];
     if (E.s && r && r.kind !== 'total') { const v = parseFloat(E.s); if (!isNaN(v)) { delete r.gst; if (E.pct) r.pct = v; else { delete r.pct; r.v = v; } } }
