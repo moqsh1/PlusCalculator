@@ -243,9 +243,9 @@ body.commenting #commentBar{display:flex}
   flex-direction: column !important;
 }
 #opCol > .k {
-  flex: 1 1 0 !important;
+  flex: 1;
   min-height: 0 !important;
-  height: 25% !important;
+  
 }
 
 /* Precise grid placement to avoid hit-area bugs */
@@ -286,7 +286,7 @@ body.commenting #commentBar{display:flex}
 #opCol > .k {
   flex: 1 1 0% !important;
   min-height: 0 !important;
-  height: auto !important;
+  
   position: relative;
   z-index: 1;
 }

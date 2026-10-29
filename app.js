@@ -356,26 +356,10 @@ function bindKeys() {
   $$('.k').forEach(b => {
     const k = b.dataset.k;
     if (IC[k] && !b.classList.contains('t')) b.innerHTML = IC[k];
-    let fired = false;
-    b.addEventListener('pointerdown', e => {
-      e.preventDefault();
-      b.classList.add('down');
-      tick();
-      fired = false;
-    });
-    const up = (e) => {
-      b.classList.remove('down');
-      if (!fired && e.type === 'pointerup') {
-        fired = true;
-        closePop();
-        press(k);
-      }
-    };
-    b.addEventListener('pointerup', up);
-    b.addEventListener('pointerleave', up);
-    b.addEventListener('pointercancel', up);
-    // fallback for keyboard / desktop
-    b.addEventListener('click', e => { if (!fired) { e.preventDefault(); closePop(); press(k); } });
+    b.addEventListener('pointerdown', e => { b.classList.add('down'); tick(); });
+    const up = () => b.classList.remove('down');
+    b.addEventListener('pointerup', up); b.addEventListener('pointerleave', up); b.addEventListener('pointercancel', up);
+    b.addEventListener('click', () => { closePop(); press(k); });
   });
   $$('#toolbar button').forEach(b => {
     b.innerHTML = IC[b.dataset.t];
@@ -865,34 +849,14 @@ window.onAndroidBack = function () {
 };
 window.addEventListener('resize', () => renderDisplay());
 
-// Stronger fix for wrong key after app is exited and reopened (iOS PWA / standalone)
-function forceLayoutRefresh() {
-  const app = document.getElementById('app');
-  const keypad = document.getElementById('keypad');
-  if (!app || !keypad) return;
-  // Force full layout recalculation
-  app.style.display = 'none';
-  void app.offsetHeight;
-  app.style.display = '';
-  // Reset any stuck pointer state
-  document.querySelectorAll('.k.down').forEach(el => el.classList.remove('down'));
-  if (typeof renderDisplay === 'function') renderDisplay();
-}
-function onResume() {
-  setTimeout(forceLayoutRefresh, 30);
-  setTimeout(forceLayoutRefresh, 150);
-}
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) onResume();
-});
-window.addEventListener('pageshow', (e) => {
-  if (e.persisted) location.reload(); // hard reload if restored from bfcache
-  else onResume();
-});
-window.addEventListener('focus', onResume);
-window.addEventListener('orientationchange', onResume);
 
-document.addEventListener('visibilitychange', () => { if (document.hidden) { try { localStorage.setItem('tapecalc', JSON.stringify(S)); } catch (e) {} } });
+// Minimal refresh on resume to clear any layout offset
+window.addEventListener('pageshow', () => {
+  setTimeout(() => { if (typeof renderDisplay === 'function') renderDisplay(); }, 100);
+});
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) setTimeout(() => { if (typeof renderDisplay === 'function') renderDisplay(); }, 100);
+});
 
 /* ---------- boot ---------- */
 bindKeys(); bindTape(); applySettings(); render();
