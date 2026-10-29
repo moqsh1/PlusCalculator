@@ -230,7 +230,7 @@ body.commenting #commentBar{display:flex}
 
 #dispTotal.bold-total { font-weight: 800 !important; }
 
-#digits .zero { grid-column: span 2; }
+
 
 #opCol .k[data-k="="] { font-weight: 700; }
 
@@ -247,3 +247,21 @@ body.commenting #commentBar{display:flex}
   min-height: 0 !important;
   height: 25% !important;
 }
+
+/* Precise grid placement to avoid hit-area bugs */
+#digits {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+#digits .zero {
+  grid-column: 1 / span 2;
+  grid-row: 4;
+}
+#digits .dot {
+  grid-column: 3;
+  grid-row: 4;
+}
+
+#digits > .k { position: relative; z-index: 1; }
+#opCol > .k, #plusCol > .k { position: relative; z-index: 1; }
