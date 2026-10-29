@@ -356,10 +356,26 @@ function bindKeys() {
   $$('.k').forEach(b => {
     const k = b.dataset.k;
     if (IC[k] && !b.classList.contains('t')) b.innerHTML = IC[k];
-    b.addEventListener('pointerdown', e => { b.classList.add('down'); tick(); });
-    const up = () => b.classList.remove('down');
-    b.addEventListener('pointerup', up); b.addEventListener('pointerleave', up); b.addEventListener('pointercancel', up);
-    b.addEventListener('click', () => { closePop(); press(k); });
+    let fired = false;
+    b.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      b.classList.add('down');
+      tick();
+      fired = false;
+    });
+    const up = (e) => {
+      b.classList.remove('down');
+      if (!fired && e.type === 'pointerup') {
+        fired = true;
+        closePop();
+        press(k);
+      }
+    };
+    b.addEventListener('pointerup', up);
+    b.addEventListener('pointerleave', up);
+    b.addEventListener('pointercancel', up);
+    // fallback for keyboard / desktop
+    b.addEventListener('click', e => { if (!fired) { e.preventDefault(); closePop(); press(k); } });
   });
   $$('#toolbar button').forEach(b => {
     b.innerHTML = IC[b.dataset.t];
@@ -848,6 +864,23 @@ window.onAndroidBack = function () {
   return false;
 };
 window.addEventListener('resize', () => renderDisplay());
+
+// Fix layout offset after app is backgrounded / restored (iOS PWA)
+function forceLayoutRefresh() {
+  const keypad = document.getElementById('keypad');
+  if (keypad) {
+    keypad.style.display = 'none';
+    void keypad.offsetHeight;
+    keypad.style.display = '';
+  }
+  if (typeof renderDisplay === 'function') renderDisplay();
+}
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) setTimeout(forceLayoutRefresh, 50);
+});
+window.addEventListener('pageshow', () => setTimeout(forceLayoutRefresh, 50));
+window.addEventListener('focus', () => setTimeout(forceLayoutRefresh, 50));
+
 document.addEventListener('visibilitychange', () => { if (document.hidden) { try { localStorage.setItem('tapecalc', JSON.stringify(S)); } catch (e) {} } });
 
 /* ---------- boot ---------- */
