@@ -865,21 +865,32 @@ window.onAndroidBack = function () {
 };
 window.addEventListener('resize', () => renderDisplay());
 
-// Fix layout offset after app is backgrounded / restored (iOS PWA)
+// Stronger fix for wrong key after app is exited and reopened (iOS PWA / standalone)
 function forceLayoutRefresh() {
+  const app = document.getElementById('app');
   const keypad = document.getElementById('keypad');
-  if (keypad) {
-    keypad.style.display = 'none';
-    void keypad.offsetHeight;
-    keypad.style.display = '';
-  }
+  if (!app || !keypad) return;
+  // Force full layout recalculation
+  app.style.display = 'none';
+  void app.offsetHeight;
+  app.style.display = '';
+  // Reset any stuck pointer state
+  document.querySelectorAll('.k.down').forEach(el => el.classList.remove('down'));
   if (typeof renderDisplay === 'function') renderDisplay();
 }
+function onResume() {
+  setTimeout(forceLayoutRefresh, 30);
+  setTimeout(forceLayoutRefresh, 150);
+}
 document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) setTimeout(forceLayoutRefresh, 50);
+  if (!document.hidden) onResume();
 });
-window.addEventListener('pageshow', () => setTimeout(forceLayoutRefresh, 50));
-window.addEventListener('focus', () => setTimeout(forceLayoutRefresh, 50));
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) location.reload(); // hard reload if restored from bfcache
+  else onResume();
+});
+window.addEventListener('focus', onResume);
+window.addEventListener('orientationchange', onResume);
 
 document.addEventListener('visibilitychange', () => { if (document.hidden) { try { localStorage.setItem('tapecalc', JSON.stringify(S)); } catch (e) {} } });
 

@@ -290,3 +290,14 @@ body.commenting #commentBar{display:flex}
   position: relative;
   z-index: 1;
 }
+
+/* Prevent touch offset / ghost taps after resume */
+.k {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+#keypad, #digits, #plusCol, #opCol, #fnPane {
+  touch-action: manipulation;
+}
