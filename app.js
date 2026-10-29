@@ -848,15 +848,7 @@ window.onAndroidBack = function () {
   return false;
 };
 window.addEventListener('resize', () => renderDisplay());
-
-
-// Minimal refresh on resume to clear any layout offset
-window.addEventListener('pageshow', () => {
-  setTimeout(() => { if (typeof renderDisplay === 'function') renderDisplay(); }, 100);
-});
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) setTimeout(() => { if (typeof renderDisplay === 'function') renderDisplay(); }, 100);
-});
+document.addEventListener('visibilitychange', () => { if (document.hidden) { try { localStorage.setItem('tapecalc', JSON.stringify(S)); } catch (e) {} } });
 
 /* ---------- boot ---------- */
 bindKeys(); bindTape(); applySettings(); render();

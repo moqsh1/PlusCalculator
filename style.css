@@ -98,8 +98,8 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 .fnPage{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,1fr);transition:transform .25s ease}
 #numPane{flex:1;display:flex;background:var(--numBg)}
 #digits{flex:4.5;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))}
-#plusCol{flex:1.36;min-width:0;display:flex;flex-direction:column}
-#opCol{flex:1.05;min-width:0;display:flex;flex-direction:column}
+#plusCol{flex:1.6;min-width:0;display:flex;flex-direction:column}
+#opCol{flex:0.7;min-width:0;display:flex;flex-direction:column}
 #plusCol .k.plus{flex:1}
 /* tall shape: one long + drawn with two bars — vertical bar runs ~84% of the key height */
 #plusCol .k.plus.tall svg{display:none}
@@ -230,74 +230,6 @@ body.commenting #commentBar{display:flex}
 
 #dispTotal.bold-total { font-weight: 800 !important; }
 
-
+#digits .zero { grid-column: span 2; }
 
 #opCol .k[data-k="="] { font-weight: 700; }
-
-#opCol { display: flex; flex-direction: column; }
-#opCol .k { flex: 1; min-height: 0; }
-
-/* Force equal height on all 4 last-column buttons */
-#opCol {
-  display: flex !important;
-  flex-direction: column !important;
-}
-#opCol > .k {
-  flex: 1;
-  min-height: 0 !important;
-  
-}
-
-/* Precise grid placement to avoid hit-area bugs */
-
-
-
-
-#digits > .k { position: relative; z-index: 1; }
-#opCol > .k, #plusCol > .k { position: relative; z-index: 1; }
-
-/* Reliable bottom row: zero takes 2/3, dot takes 1/3 */
-#digits .zero-row {
-  grid-column: 1 / -1;
-  grid-row: 4;
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-#digits .zero-row .zero {
-  flex: 2;
-  min-width: 0;
-}
-#digits .zero-row .dot {
-  flex: 1;
-  min-width: 0;
-}
-#digits > .k, #digits .zero-row > .k {
-  position: relative;
-  z-index: 1;
-  touch-action: manipulation;
-}
-
-#opCol {
-  display: flex !important;
-  flex-direction: column !important;
-  overflow: hidden;
-}
-#opCol > .k {
-  flex: 1 1 0% !important;
-  min-height: 0 !important;
-  
-  position: relative;
-  z-index: 1;
-}
-
-/* Prevent touch offset / ghost taps after resume */
-.k {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-select: none;
-}
-#keypad, #digits, #plusCol, #opCol, #fnPane {
-  touch-action: manipulation;
-}
