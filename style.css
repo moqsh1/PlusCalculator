@@ -249,19 +249,44 @@ body.commenting #commentBar{display:flex}
 }
 
 /* Precise grid placement to avoid hit-area bugs */
-#digits {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-}
-#digits .zero {
-  grid-column: 1 / span 2;
-  grid-row: 4;
-}
-#digits .dot {
-  grid-column: 3;
-  grid-row: 4;
-}
+
+
+
 
 #digits > .k { position: relative; z-index: 1; }
 #opCol > .k, #plusCol > .k { position: relative; z-index: 1; }
+
+/* Reliable bottom row: zero takes 2/3, dot takes 1/3 */
+#digits .zero-row {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+#digits .zero-row .zero {
+  flex: 2;
+  min-width: 0;
+}
+#digits .zero-row .dot {
+  flex: 1;
+  min-width: 0;
+}
+#digits > .k, #digits .zero-row > .k {
+  position: relative;
+  z-index: 1;
+  touch-action: manipulation;
+}
+
+#opCol {
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden;
+}
+#opCol > .k {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  position: relative;
+  z-index: 1;
+}
