@@ -98,7 +98,8 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 .fnPage{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,1fr);transition:transform .25s ease}
 #numPane{flex:1;display:flex;background:var(--numBg)}
 #digits{flex:4.5;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))}
-#plusCol,#opCol{flex:1;min-width:0;display:flex;flex-direction:column}
+#plusCol{flex:1.6;min-width:0;display:flex;flex-direction:column}
+#opCol{flex:0.7;min-width:0;display:flex;flex-direction:column}
 #plusCol .k.plus{flex:1}
 /* tall shape: one long + drawn with two bars — vertical bar runs ~84% of the key height */
 #plusCol .k.plus.tall svg{display:none}
@@ -228,3 +229,7 @@ body.commenting #commentBar{display:flex}
 #toast{position:fixed;left:50%;bottom:140px;transform:translateX(-50%);z-index:40;background:rgba(30,30,30,.92);color:#fff;font-size:14px;padding:10px 16px;border-radius:20px;white-space:nowrap}
 
 #dispTotal.bold-total { font-weight: 800 !important; }
+
+#digits .zero { grid-column: span 2; }
+
+#opCol .k[data-k="="] { font-weight: 700; }
