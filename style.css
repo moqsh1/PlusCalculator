@@ -98,8 +98,8 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 .fnPage{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,1fr);transition:transform .25s ease}
 #numPane{flex:1;display:flex;background:var(--numBg)}
 #digits{flex:4.5;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))}
-#plusCol{flex:1.6;min-width:0;display:flex;flex-direction:column}
-#opCol{flex:0.7;min-width:0;display:flex;flex-direction:column}
+#plusCol{flex:1.36;min-width:0;display:flex;flex-direction:column}
+#opCol{flex:1.05;min-width:0;display:flex;flex-direction:column}
 #plusCol .k.plus{flex:1}
 /* tall shape: one long + drawn with two bars — vertical bar runs ~84% of the key height */
 #plusCol .k.plus.tall svg{display:none}
@@ -233,3 +233,17 @@ body.commenting #commentBar{display:flex}
 #digits .zero { grid-column: span 2; }
 
 #opCol .k[data-k="="] { font-weight: 700; }
+
+#opCol { display: flex; flex-direction: column; }
+#opCol .k { flex: 1; min-height: 0; }
+
+/* Force equal height on all 4 last-column buttons */
+#opCol {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#opCol > .k {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  height: 25% !important;
+}
