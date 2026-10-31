@@ -34,18 +34,18 @@ body[data-theme=ocean]{
 #tapeArea{position:relative;flex:1;min-height:0;display:flex;flex-direction:column}
 
 /* GST mode card: top-left of the tape, big numbers; the tape reserves space under it (app.js) */
-#gstPanel{display:none;position:absolute;left:8px;top:8px;width:calc(100% - 16px);max-width:470px;z-index:2;
-  padding:10px 14px 12px;border-radius:14px;background:var(--tapeBg);color:var(--tapeText);
+#gstPanel{display:none;position:absolute;left:8px;top:8px;width:calc((100% - 16px) * .85);max-width:400px;z-index:2;
+  padding:8.5px 12px 10px;border-radius:12px;background:var(--tapeBg);color:var(--tapeText);
   border:1px solid var(--tapeLine);box-shadow:0 4px 18px rgba(0,0,0,.18);font-variant-numeric:tabular-nums}
 body.gstmode #gstPanel{display:block}
-#gstPanel .h{font-size:16.9px;color:var(--tapeDim);margin-bottom:4px}
+#gstPanel .h{font-size:14.4px;color:var(--tapeDim);margin-bottom:3.4px}
 #gstPanel .h b{color:var(--tapeText)}
-#gstPanel .l{display:flex;align-items:baseline;gap:6px;padding:3px 4px;margin:0 -4px;border-radius:8px}
+#gstPanel .l{display:flex;align-items:baseline;gap:5px;padding:2.5px 4px;margin:0 -4px;border-radius:8px}
 #gstPanel .l:active{background:var(--tapeLine)}
-#gstPanel .l span{width:58px;flex:none;font-size:19.5px;font-weight:600;color:var(--tapeDim)}
-#gstPanel .l .v{font-size:min(33.8px,8.4vw);font-weight:600;letter-spacing:-.3px}
-#gstPanel .l i{margin-left:auto;font-style:normal;font-size:16.9px;color:var(--tapeDim);white-space:nowrap}
-#gstPanel .cs{display:flex;gap:16px;margin-top:6px;padding-top:6px;border-top:1px solid var(--tapeLine);font-size:19.5px}
+#gstPanel .l span{width:49px;flex:none;font-size:16.6px;font-weight:600;color:var(--tapeDim)}
+#gstPanel .l .v{font-size:min(28.7px,7.1vw);font-weight:600;letter-spacing:-.3px}
+#gstPanel .l i{margin-left:auto;font-style:normal;font-size:14.4px;color:var(--tapeDim);white-space:nowrap}
+#gstPanel .cs{display:flex;gap:14px;margin-top:5px;padding-top:5px;border-top:1px solid var(--tapeLine);font-size:16.6px}
 #gstPanel .cs span{color:var(--tapeDim)}
 /* home-screen web app on iPhone draws under the notch and home bar: pad those areas and
    tint them like the tape (top) and tool bar (bottom). Native builds report 0 insets. */
@@ -57,17 +57,17 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 /* ---------- tape ---------- */
 #tapeWrap{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;background:var(--tapeBg);color:var(--tapeText)}
 #tape{display:flex;flex-direction:column;justify-content:flex-end;min-height:100%;padding:6px 0 10px}
-.row{position:relative;display:flex;align-items:center;min-height:28px;padding:0 12px 0 4px;font-size:14.5px;font-variant-numeric:tabular-nums}
-.row .ix{width:16px;flex:none;font-size:8px;color:var(--tapeDim);text-align:left;padding-left:2px;align-self:center}
+.row{position:relative;display:flex;align-items:center;min-height:36px;padding:0 12px 0 4px;font-size:18.85px;font-variant-numeric:tabular-nums}
+.row .ix{width:21px;flex:none;font-size:10.4px;color:var(--tapeDim);text-align:left;padding-left:2px;align-self:center}
 .row .lbl{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:6px}
 .row .lbl input{width:100%;font:inherit;border:0;outline:0;background:var(--sel);color:var(--selText);padding:2px 4px;border-radius:2px;-webkit-user-select:text;user-select:text}
-.row .opc{width:34px;flex:none;text-align:center}
+.row .opc{width:44px;flex:none;text-align:center}
 .row .val{flex:none;min-width:38%;text-align:right;white-space:nowrap}
-.row .val small{display:block;font-size:9px;color:var(--tapeDim);line-height:1;margin-top:1px}
+.row .val small{display:block;font-size:11.7px;color:var(--tapeDim);line-height:1;margin-top:1px}
 .row.neg .val,.row .opc.eq{color:var(--neg)}
 /* the "=" total line: bold and 30% bigger than normal tape rows (14.5px -> 18.85px) */
-.row.total{margin-top:6px;font-size:18.85px;font-weight:700;min-height:36px}
-.row.total .val small{font-size:11.7px}
+.row.total{margin-top:8px;font-size:24.5px;font-weight:700;min-height:47px}
+.row.total .val small{font-size:15.2px}
 /* C line: black rule above it and above the next calculation */
 .row.clr,.row.clr+.row{border-top:1.5px solid var(--tapeText)}
 .row.clr .opc{font-weight:500}
@@ -78,16 +78,16 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 .row.pending{opacity:.55;font-style:italic}
 
 /* ---------- display ---------- */
-#display{position:relative;flex:none;height:146px;background:var(--dispBg);color:var(--dispText);padding:6px 12px 6px 10px;overflow:hidden}
-#dispTop{font-size:11px;color:var(--dispDim);white-space:nowrap}
+#display{position:relative;flex:none;height:95px;background:var(--dispBg);color:var(--dispText);padding:6px 12px 6px 10px;overflow:hidden}
+#dispTop{font-size:8px;color:var(--dispDim);white-space:nowrap}
 #dispTop #dispMode{margin-left:4px}
-#dispFmt{position:absolute;left:10px;top:70px;font-size:11px;color:var(--dispDim)}
-#dispTotal{position:absolute;right:12px;top:12px;font-size:49.4px;font-weight:300;letter-spacing:-.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
-#grabber{position:absolute;left:50%;top:68px;width:22px;height:4px;margin-left:-11px;border-radius:2px;background:var(--dispDim);opacity:.35}
-#dispEntryRow{position:absolute;right:10px;bottom:6px;display:flex;align-items:center;font-size:49.4px;font-weight:400;white-space:nowrap;font-variant-numeric:tabular-nums}
-#dispOp{font-size:20.8px;color:var(--dispDim);margin-right:8px}
-#dispEntry small{font-size:20.8px;color:var(--dispDim);margin-left:4px}
-#caret{display:inline-block;width:2px;height:47px;margin-left:2px;background:var(--dispText);animation:blink 1s steps(1) infinite}
+#dispFmt{position:absolute;left:10px;top:45px;font-size:8px;color:var(--dispDim)}
+#dispTotal{position:absolute;right:12px;top:8px;font-size:32.1px;font-weight:300;letter-spacing:-.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+#grabber{position:absolute;left:50%;top:44px;width:22px;height:4px;margin-left:-11px;border-radius:2px;background:var(--dispDim);opacity:.35}
+#dispEntryRow{position:absolute;right:10px;bottom:5px;display:flex;align-items:center;font-size:32.1px;font-weight:400;white-space:nowrap;font-variant-numeric:tabular-nums}
+#dispOp{font-size:13.5px;color:var(--dispDim);margin-right:8px}
+#dispEntry small{font-size:13.5px;color:var(--dispDim);margin-left:4px}
+#caret{display:inline-block;width:2px;height:30px;margin-left:2px;background:var(--dispText);animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 /* GST breakdown on the left of the display; numbers stay on the right */
 #display.edit{box-shadow:inset 0 0 0 3px var(--neg)}
