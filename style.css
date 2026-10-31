@@ -65,7 +65,9 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 .row .val{flex:none;min-width:38%;text-align:right;white-space:nowrap}
 .row .val small{display:block;font-size:9px;color:var(--tapeDim);line-height:1;margin-top:1px}
 .row.neg .val,.row .opc.eq{color:var(--neg)}
-.row.total{margin-top:6px}
+/* the "=" total line: bold and 30% bigger than normal tape rows (14.5px -> 18.85px) */
+.row.total{margin-top:6px;font-size:18.85px;font-weight:700;min-height:36px}
+.row.total .val small{font-size:11.7px}
 /* C line: black rule above it and above the next calculation */
 .row.clr,.row.clr+.row{border-top:1.5px solid var(--tapeText)}
 .row.clr .opc{font-weight:500}
@@ -94,11 +96,11 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 /* ---------- keypad ---------- */
 #keypad{flex:none;display:flex;height:calc(min(16.6667vw,9.6vh) * 4);background:var(--numBg)}
 /* 7 columns, widths in units (7 total):
-   col1 0.7 (was 1) | col2 1 | cols 3,4,5 1.1 each (+0.1 from col1) | col6 1.15 (+0.15 from col7) | col7 0.85 */
-#fnPane{position:relative;width:24.2857%;background:var(--fnBg);overflow:hidden;touch-action:pan-y}
-.fnPage{position:absolute;inset:0;display:grid;grid-template-columns:0.7fr 1fr;grid-template-rows:repeat(4,1fr);transition:transform .25s ease}
+   col1 0.7 | col2 0.7 | cols 3,4,5 1.2 each | col6 1.15 | col7 0.85 */
+#fnPane{position:relative;width:20%;background:var(--fnBg);overflow:hidden;touch-action:pan-y}
+.fnPage{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,1fr);transition:transform .25s ease}
 #numPane{flex:1;display:flex;background:var(--numBg)}
-#digits{flex:3.3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))}
+#digits{flex:3.6;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))}
 /* zero is double width (two digit columns); the dot takes the last column of the bottom row */
 #digits .k.zero{grid-column:span 2}
 #plusCol{flex:1.15;min-width:0;display:flex;flex-direction:column}
@@ -132,7 +134,7 @@ body[data-gst=row]:not(.gstmode) #gstRow .k.gst:not(.gsw){opacity:.3}
 body[data-gst=row] #gstRow{display:flex}
 body[data-gst=row] #gstCol,body[data-gst=off] #gstCol{display:none}
 /* row/off modes = the 7-column layout: fn pane is 1.7 of 7 units; GST column mode keeps the same ratios, scaled */
-body[data-gst=row] #fnPane,body[data-gst=off] #fnPane{width:24.2857%}
+body[data-gst=row] #fnPane,body[data-gst=off] #fnPane{width:20%}
 body[data-gst=row] .k.fn svg,body[data-gst=off] .k.fn svg{width:29px;height:29px}
 body[data-gst=row] .k.fn.t,body[data-gst=off] .k.fn.t{font-size:21px}
 .k.d{color:var(--numGlyph);font-size:clamp(34px,11.5vw,50px);font-weight:700}

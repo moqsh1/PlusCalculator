@@ -1,5 +1,5 @@
 // Offline cache for the web (home-screen) version. Bump VERSION whenever the app files change.
-const VERSION = 'plus-calc-20261031181700';
+const VERSION = 'plus-calc-20261031190000';
 const FILES = ['./', './index.html', './style.css', './app.js', './manifest.json',
   './icons/apple-touch-icon.png', './icons/icon-192.png', './icons/icon-512.png'];
 
