@@ -57,7 +57,7 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 /* ---------- tape ---------- */
 #tapeWrap{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;background:var(--tapeBg);color:var(--tapeText)}
 #tape{display:flex;flex-direction:column;justify-content:flex-end;min-height:100%;padding:6px 0 10px}
-.row{position:relative;display:flex;align-items:center;min-height:32px;padding:0 12px 0 4px;font-size:17px;font-weight:500;font-variant-numeric:tabular-nums}
+.row{position:relative;display:flex;align-items:center;min-height:28px;padding:0 12px 0 4px;font-size:14.5px;font-variant-numeric:tabular-nums}
 .row .ix{width:16px;flex:none;font-size:8px;color:var(--tapeDim);text-align:left;padding-left:2px;align-self:center}
 .row .lbl{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:6px}
 .row .lbl input{width:100%;font:inherit;border:0;outline:0;background:var(--sel);color:var(--selText);padding:2px 4px;border-radius:2px;-webkit-user-select:text;user-select:text}
@@ -77,12 +77,12 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 
 /* ---------- display ---------- */
 #display{position:relative;flex:none;height:112px;background:var(--dispBg);color:var(--dispText);padding:6px 12px 6px 10px;overflow:hidden}
-#dispTop{font-size:11px;color:var(--dispDim);white-space:nowrap}
+#dispTop{font-size:8.5px;color:var(--dispDim);white-space:nowrap}
 #dispTop #dispMode{margin-left:4px}
-#dispFmt{position:absolute;left:10px;top:54px;font-size:11px;color:var(--dispDim)}
-#dispTotal{position:absolute;right:12px;top:10px;font-size:46px;font-weight:600;letter-spacing:-.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+#dispFmt{position:absolute;left:10px;top:54px;font-size:8.5px;color:var(--dispDim)}
+#dispTotal{position:absolute;right:12px;top:10px;font-size:38px;font-weight:300;letter-spacing:-.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
 #grabber{position:absolute;left:50%;top:52px;width:22px;height:4px;margin-left:-11px;border-radius:2px;background:var(--dispDim);opacity:.35}
-#dispEntryRow{position:absolute;right:10px;bottom:6px;display:flex;align-items:center;font-size:46px;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+#dispEntryRow{position:absolute;right:10px;bottom:6px;display:flex;align-items:center;font-size:38px;font-weight:400;white-space:nowrap;font-variant-numeric:tabular-nums}
 #dispOp{font-size:16px;color:var(--dispDim);margin-right:8px}
 #dispEntry small{font-size:16px;color:var(--dispDim);margin-left:4px}
 #caret{display:inline-block;width:2px;height:36px;margin-left:2px;background:var(--dispText);animation:blink 1s steps(1) infinite}
@@ -93,13 +93,16 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 
 /* ---------- keypad ---------- */
 #keypad{flex:none;display:flex;height:calc(min(16.6667vw,9.6vh) * 4);background:var(--numBg)}
-/* column widths in units: fn 0.75+0.75, GST 0.9, digits 3, + 1, ops 1 = 7.4 */
-#fnPane{position:relative;width:14.2%;background:var(--fnBg);overflow:hidden;touch-action:pan-y}
-.fnPage{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,1fr);transition:transform .25s ease}
+/* 7 columns, widths in units (7 total):
+   col1 0.7 (was 1) | col2 1 | cols 3,4,5 1.1 each (+0.1 from col1) | col6 1.15 (+0.15 from col7) | col7 0.85 */
+#fnPane{position:relative;width:24.2857%;background:var(--fnBg);overflow:hidden;touch-action:pan-y}
+.fnPage{position:absolute;inset:0;display:grid;grid-template-columns:0.7fr 1fr;grid-template-rows:repeat(4,1fr);transition:transform .25s ease}
 #numPane{flex:1;display:flex;background:var(--numBg)}
-#digits{flex:4.5;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))}
-#plusCol{flex:1.6;min-width:0;display:flex;flex-direction:column}
-#opCol{flex:0.7;min-width:0;display:flex;flex-direction:column}
+#digits{flex:3.3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))}
+/* zero is double width (two digit columns); the dot takes the last column of the bottom row */
+#digits .k.zero{grid-column:span 2}
+#plusCol{flex:1.15;min-width:0;display:flex;flex-direction:column}
+#opCol{flex:.85;min-width:0;display:flex;flex-direction:column}
 #plusCol .k.plus{flex:1}
 /* tall shape: one long + drawn with two bars — vertical bar runs ~84% of the key height */
 #plusCol .k.plus.tall svg{display:none}
@@ -109,12 +112,12 @@ body.commenting #app{background:linear-gradient(var(--tapeBg) 50%,#7b7b7b 50%)}
 #opCol .k.small{flex:1;min-height:0}
 .k{display:flex;align-items:center;justify-content:center;position:relative}
 .k.fn{color:var(--fnGlyph)}
-.k.fn svg{width:24px;height:24px}
-.k.fn.t{font-size:18px;font-weight:600}
+.k.fn svg{width:26px;height:26px;stroke-width:2.4}
+.k.fn.t{font-size:18px;font-weight:700}
 #gstCol{width:12.16%;display:grid;grid-template-rows:repeat(4,minmax(0,1fr));background:var(--fnBg);box-shadow:inset 1px 0 0 rgba(128,128,128,.18)}
 .k.gst{flex-direction:column;color:var(--fnGlyph);line-height:1.05}
-.k.gst b{font-size:16px;font-weight:800;letter-spacing:-.3px}
-.k.gst small{font-size:11px;opacity:.7;margin-top:2px}
+.k.gst b{font-size:15px;font-weight:800;letter-spacing:-.3px}
+.k.gst small{font-size:10px;font-weight:700;opacity:.8;margin-top:2px}
 #numPane{min-width:0}
 /* GST layout (Settings): row = strip above the keypad and the original column widths; off = neither */
 #gstRow{display:none;flex:none;height:40px;background:var(--fnBg);box-shadow:inset 0 1px 0 rgba(128,128,128,.25),inset 0 -1px 0 rgba(128,128,128,.25)}
@@ -128,13 +131,14 @@ body.gstmode #gstRow .gsw .tg::after{left:15px}
 body[data-gst=row]:not(.gstmode) #gstRow .k.gst:not(.gsw){opacity:.3}
 body[data-gst=row] #gstRow{display:flex}
 body[data-gst=row] #gstCol,body[data-gst=off] #gstCol{display:none}
-body[data-gst=row] #fnPane,body[data-gst=off] #fnPane{width:20%}
-body[data-gst=row] .k.fn svg,body[data-gst=off] .k.fn svg{width:27px;height:27px}
-body[data-gst=row] .k.fn.t,body[data-gst=off] .k.fn.t{font-size:22px;font-weight:600}
-.k.d{color:var(--numGlyph);font-size:clamp(36px,12vw,52px);font-weight:600}
-.k.d.dot{font-weight:600}
+/* row/off modes = the 7-column layout: fn pane is 1.7 of 7 units; GST column mode keeps the same ratios, scaled */
+body[data-gst=row] #fnPane,body[data-gst=off] #fnPane{width:24.2857%}
+body[data-gst=row] .k.fn svg,body[data-gst=off] .k.fn svg{width:29px;height:29px}
+body[data-gst=row] .k.fn.t,body[data-gst=off] .k.fn.t{font-size:21px}
+.k.d{color:var(--numGlyph);font-size:clamp(34px,11.5vw,50px);font-weight:700}
+.k.d.dot{font-weight:800}
 .k.op{color:var(--opGlyph)}
-.k.op svg{width:26px;height:26px}
+.k.op svg{width:28px;height:28px;stroke-width:3.2}
 .k.op.plus{z-index:5}
 /* above ~250% the sign spills over neighbouring keys; it stays see-through to taps */
 .k.op.plus svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:var(--plusSize,46px);height:var(--plusSize,46px);pointer-events:none}
@@ -227,9 +231,3 @@ body.commenting #commentBar{display:flex}
 #sheet .memv{margin-left:auto;font-variant-numeric:tabular-nums}
 
 #toast{position:fixed;left:50%;bottom:140px;transform:translateX(-50%);z-index:40;background:rgba(30,30,30,.92);color:#fff;font-size:14px;padding:10px 16px;border-radius:20px;white-space:nowrap}
-
-#dispTotal.bold-total { font-weight: 800 !important; }
-
-#digits .zero { grid-column: span 2; }
-
-#opCol .k[data-k="="] { font-weight: 700; }
